@@ -1,7 +1,10 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
+import { initializeDatabase } from './services/init-db.service';
 
 dotenv.config();
+
+initializeDatabase();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
