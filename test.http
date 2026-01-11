@@ -1,0 +1,164 @@
+### Health Check
+GET http://localhost:3000/health
+
+### Create Tournament
+POST http://localhost:3000/tournaments
+Content-Type: application/json
+
+{
+  "name": "Summer Championship 2026"
+}
+
+### Create another Tournament
+POST http://localhost:3000/tournaments
+Content-Type: application/json
+
+{
+  "name": "Winter Cup 2026"
+}
+
+### Test validation - empty name (should fail)
+POST http://localhost:3000/tournaments
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Test validation - no name (should fail)
+POST http://localhost:3000/tournaments
+Content-Type: application/json
+
+{
+}
+
+### Create Player 1
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+  "name": "Alice"
+}
+
+### Create Player 2
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+  "name": "Bob"
+}
+
+### Create Player 3
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+  "name": "Charlie"
+}
+
+### Duplicate player (should fail)
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+  "name": "Alice"
+}
+
+### Test validation - empty name (should fail)
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Add Alice to Summer Championship (player_id: 1)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 1
+}
+
+### Add Bob to Summer Championship (player_id: 2)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 2
+}
+
+### Add Charlie to Summer Championship (player_id: 3)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 3
+}
+
+### Add Diana to Summer Championship (player_id: 4)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 4
+}
+
+### Add Eve to Summer Championship (player_id: 5)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 5
+}
+
+### Try to add Frank (should fail - max 5 participants)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 6
+}
+
+### Try to add Alice again (should fail - already in tournament)
+POST http://localhost:3000/tournaments/1/participants
+Content-Type: application/json
+
+{
+  "player_id": 1
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Always leave this at the bottom 
+# Server starten (Terminal 1)
+npm run dev
+
+# Turnier erstellen (Terminal 2)
+Invoke-WebRequest -Uri http://localhost:3000/tournaments -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"name":"Test Tournament"}'
+
+# Oder mit curl (falls installiert)
+curl -X POST http://localhost:3000/tournaments -H "Content-Type: application/json" -d "{\"name\":\"Test Tournament\"}"
+
+curl -X POST http://localhost:3000/players -H "Content-Type: application/json" -d "{\"name\":\"Alice\"}"
+
+curl -X POST http://localhost:3000/participants -H "Content-Type: application/json" -d "{\"tournament_id\":1,\"player_id\":1}"
+
+curl -X POST http://localhost:3000/games -H "Content-Type: application/json" -d "{\"tournament_id\":1,\"player1_id\":1,\"player2_id\":2,\"player1_score\":2,\"player2_score\":1}"
+
+# Check Tournament status
+curl -X GET http://localhost:3000/tournaments/1/status
