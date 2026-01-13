@@ -49,3 +49,21 @@ Please include a small artifact folder or a markdown section with:
 This helps us understand your workflow and decision-making process, not to judge AI usage.
 
 Happy coding!
+
+## Solution
+
+All requirements are satisfied.
+
+**Remarks on solution**
+
+Since it was not specifically specified, it is not possible to:
+- delete or edit tournaments
+- delete or edit players
+- delete or edit participants
+- delete or edit results
+
+Additionally, it is also possible that a "finished" tournament can change back to the "started" status if another player is added to a tournament with "finished" status.
+
+**Regarding AI usage:**
+
+During the creation of the project GitHub Copilot and GitHub Copilot Autocompletion was used. The conversation and usage of GitHub Copilot can be seen in the "AI_usage.txt"-File.
